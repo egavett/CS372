@@ -7,13 +7,14 @@ package pr1_6;
 import java.util.Scanner;
 
 /**
- *
+ * This class returns all prime numbers under a maximum value given by the user
  * @author Eli Gavett
  */
 public class PR1_6 {
 
     /**
-     * @param args the command line arguments
+     * Examines all integers under a maximum value and returns all prime values
+     * @param args 
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);

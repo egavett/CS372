@@ -6,13 +6,15 @@
 package pr1_4;
 import java.util.Scanner;
 /**
- *
+ * This class returns the area of a circle based on a radius given by the user
  * @author Eli Gavett
  */
 public class PR1_4 {
 
     /**
-     * @param args the command line arguments
+     * Takes a radius and returns the area of a circle
+     * @param rad the radius of a circle
+     * @return the area of a circle with that radius
      */
     final static double PI = 3.14;
     public static void main(String[] args) {

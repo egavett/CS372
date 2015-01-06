@@ -6,13 +6,13 @@
 package pr1_5;
 import java.util.Random;
 /**
- *
+ * This class generates 25 random integers, and compares them to 25 other random integers
  * @author Eli Gavett
  */
 public class PR1_5 {
 
     /**
-     * @param args the command line arguments
+     * Generates and compares 25 random integers
      */
     public static void main(String[] args) {
         Random rand = new Random();

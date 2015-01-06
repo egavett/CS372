@@ -1,32 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pr1_2;
-import java.util.Scanner;
 /**
- *
+ * This class prints out <code>hello world</code> in  a language
+ * given in the command line
  * @author Eli Gavett
  */
 public class PR1_2 {
 
     /**
-     * Asks User for 2 integers and a String
-     * Returns 2 integers and a String
+     * returns <code>hello world</code> in the given language. English is default
+     * @param args a language given in command line
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Scanner input = new Scanner(System.in); //Creates Scanner
-        System.out.println("Input an integer: "); //Ask for first int
-        int int1 = input.nextInt(); //
-        System.out.println("Input an integer: "); //Ask for second int
-        int int2 = input.nextInt();
-        System.out.println("Input a String: ");  //Ask for a String
-        String string1 = input.next();
-        System.out.println(int1);
-        System.out.println(int2);
-        System.out.println(string1);
+        String greeting;
+        if (args.length > 0 && args[0].equalsIgnoreCase("spanish"))
+            greeting = "hola mundo";
+        else if(args.length > 0 && args[0].equalsIgnoreCase("german"))
+            greeting = "hallo welt";
+        else if(args.length > 0 && args[0].equalsIgnoreCase("french"))
+            greeting = "bon jour le monde";
+        else
+            greeting = "hello world";
+        System.out.println(greeting);
     }
     
 }
