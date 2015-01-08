@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package pr2_1;
-import java.util.*;
+import java.util.ArrayList;
 /**
  *
  * @author Eli Gavett
@@ -15,7 +15,7 @@ public class PR2_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        List list = new ArrayList();
+        ArrayList<Gerbil> list = new ArrayList<Gerbil>();
         for(int a = 0; a < 10; a++){
             list.add(new Gerbil(a+1));
         }

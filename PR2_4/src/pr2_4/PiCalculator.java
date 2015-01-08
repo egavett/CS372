@@ -43,8 +43,7 @@ public class PiCalculator {
                 div += 2;
                 
             }
-         System.out.print((a+1) + ": ");
-         System.out.println(est);
+         System.out.println((a+1) + ": " + est);
         }
 
     }
