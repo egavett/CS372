@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLblTMName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLblSamName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLblCCName" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jTFSamInput" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFTMInput" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jTFCCInput" min="-2" pref="37" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLblTitle" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jBtnSale" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLblTotal" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblTMSold" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblSamSold" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblCCSold" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jLblTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLblTMName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFTMInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblTMSold" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLblSamName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFSamInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblSamSold" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLblCCName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFCCInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblCCSold" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jBtnSale" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLblTitle">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Girl Scout Cookie Tracker"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblTMName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Thin Mints ($3) -"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblSamName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Samoas ($4) -"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblCCName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Chocolate Chip ($5)  - "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFTMInput">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFSamInput">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFSamInputActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTFCCInput">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblTMSold">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 Sold"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblSamSold">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 Sold"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblCCSold">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0 Sold"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnSale">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sold!"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSaleActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLblTotal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total Sales: $0"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
