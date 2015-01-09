@@ -16,7 +16,7 @@ public class PR1_4 {
      * @param rad the radius of a circle
      * @return the area of a circle with that radius
      */
-    final static double PI = 3.14;
+    final static double PI = 3.14; //PT: use java.lang.Math.PI
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
