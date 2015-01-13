@@ -17,6 +17,7 @@ public class PiCalculator {
         double est = 0;
         int div = 1;
         for(int a = 0; a < it; a++){
+            //PT -- As we discussed in class, look for opportunities to reduce code
             if(a % 2 == 0){
                 est += (double)(4.0/div);
                 div += 2;

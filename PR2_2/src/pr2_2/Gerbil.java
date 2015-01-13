@@ -9,9 +9,11 @@ import java.util.Iterator;
  *
  * @author Eli Gavett
  */
+//PT -- Reuse the Gerbil in PR2_1, don't copy/paste it here. -2
 public class Gerbil{
     private int gerbilNumber;
     
+    //PT -- need javadoc. -2
     public Gerbil(int gerbilNumber){
         this.gerbilNumber = gerbilNumber;
     }

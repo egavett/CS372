@@ -14,6 +14,7 @@ public class Gerbil {
         this.gerbilNumber = gerbilNumber;
     }
     
+    //need javadoc -2
     public void hop(){
         System.out.printf("Gerbil %d is hopping.", gerbilNumber);
         System.out.println();

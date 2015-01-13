@@ -10,9 +10,12 @@ package pr2_4;
  * @author Eli Gavett
  */
 public class PiCalculator {
+    //PT -- since this is empty, why is it here?
     PiCalculator(){
         
     }
+    
+    //PT -- need javadoc -2
     public double calculate(int it){
         double est = 0;
         int div = 1;
