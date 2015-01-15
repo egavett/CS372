@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * This Class takes in 10 integer values and prints the maximum, average, and minimum values
+ * Throws an exception if the the input is not an integer
  * @author Eli Gavett
  */
 public class PR3_1 {
@@ -35,6 +36,11 @@ public class PR3_1 {
         }
     }
     
+    /*
+    * Searches an arraylist of integers and returns the maximum value
+    * @param list the ArrayList
+    * @return max the maximum value
+    */
     public static int maximum(ArrayList<Integer> list){
         int max = list.get(0);
         for(int a = 1; a < list.size(); a++){
@@ -44,6 +50,11 @@ public class PR3_1 {
         return max;
     }
     
+    /*
+    * Searches an arraylist of integers and reutrns the minimum value
+    * @param list the Arraylist
+    * @return min the minimum value
+    */
     public static int minimum(ArrayList<Integer> list){
         int min = list.get(0);
         for(int a = 1; a < list.size(); a++){
@@ -52,7 +63,11 @@ public class PR3_1 {
         }
         return min;
     }
-    
+    /*
+    * Adds up the values of integers in an ArrayList and returns the average
+    * @param list the ArrayList
+    * @return ave the average value
+    */
     public static int average(ArrayList<Integer> list){
         int ave = 0;
         for(int a = 0; a < list.size(); a++)

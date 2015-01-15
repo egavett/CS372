@@ -12,7 +12,11 @@ public class Triangle extends Shape{
     private int s1;
     private int s2;
     private int s3;
-    
+    /*
+    * Constructer for Triangle class
+    * Contains additional check to ensure that no one side of the triangle 
+    * is greater than the other two combined
+    */
     public Triangle(int s1, int s2, int s3) throws ArithmeticException{
         if((s1 + s2) < s3 || (s1 + s3) < s2 || (s2 + s3) < s1)
             throw new ArithmeticException("Invalid Triange Lengths");
@@ -22,6 +26,11 @@ public class Triangle extends Shape{
         this.s2 = s2;
         this.s3 = s3;
     }
+    
+    /*
+    * Calculates the perimeter of the triangle
+    * @return the perimeter of the triangle
+    */
     @Override
     public double getPerimeter(){
         return s1 + s2 + s3;
@@ -30,6 +39,7 @@ public class Triangle extends Shape{
     
     /*
     * Uses Heron's Formula to find the area of the Triangle
+    * @return the area of the triangle
     */
     @Override
     public double getArea(){

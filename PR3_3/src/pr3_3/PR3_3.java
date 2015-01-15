@@ -5,12 +5,14 @@
  */
 package pr3_3;
 import java.io.*;
+import javax.swing.*;
 /**
  *
  * @author Eli Gavett
  */
 public class PR3_3 extends javax.swing.JFrame {
     private static EventManager manager = new EventManager();
+    
     /**
      * Creates new form PR3_3
      */
@@ -191,16 +193,23 @@ public class PR3_3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFDayActionPerformed
 
     private void jBtnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInputActionPerformed
-        String l = jTFLocation.getText();
-        String n = jTFName.getText();
-        int d = Integer.parseInt(jTFDay.getText());
-        int m = Integer.parseInt(jTFMonth.getText());
-        int y = Integer.parseInt(jTFYear.getText());
-        
-        Event e = new Event(n, l, d, m, y);
-        
-        manager.addEvent(e);
-        //jLstEvents.addElement(e.toString());
+        try{
+           String l = jTFLocation.getText();
+           String n = jTFName.getText();
+           int d = Integer.parseInt(jTFDay.getText());
+           int m = Integer.parseInt(jTFMonth.getText());
+           int y = Integer.parseInt(jTFYear.getText());
+           
+           if(l.contains("_") || n.contains("_"))
+               throw new Exception("'_' is not a legal character");
+           Event e = new Event(n, l, d, m, y);
+           
+           manager.addEvent(e);
+           updateList();
+        }
+        catch(Exception ex){
+            System.out.printf("No, you can't do that: %s\n", ex.getMessage());
+        }
     }//GEN-LAST:event_jBtnInputActionPerformed
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
@@ -215,6 +224,7 @@ public class PR3_3 extends javax.swing.JFrame {
             manager.sortByName();
         else
             manager.sortByLocation();
+        updateList();
     }//GEN-LAST:event_JCBoxSortActionPerformed
 
     /**
@@ -249,9 +259,11 @@ public class PR3_3 extends javax.swing.JFrame {
             public void run() {
                 new PR3_3().setVisible(true);
                 readFile("C:\\Users\\Eli Gavett\\Documents\\GitHub\\CS372\\PR3_3\\list.txt");
+                updateList();
             }
         });
     }
+    
     /*
     * If the file exists, reads the file for event informations and adds them to manager
     * @param String f the location of the file
@@ -264,22 +276,28 @@ public class PR3_3 extends javax.swing.JFrame {
             int index1 = 0;
             int index2;
             while((line = rdr.readLine()) != null){
-                index2 = line.indexOf(" ");
+                index2 = line.indexOf("_");
                 String n = line.substring(index1, index2);
+                index2++;
                 
-                index1 = line.indexOf(" ", index2);
+                index1 = line.indexOf("_", index2 );
                 String l = line.substring(index2, index1);
+                index1++;
                 
-                index2 = line.indexOf(" ", index1);
+                index2 = line.indexOf("_", index1);
                 int d = Integer.parseInt(line.substring(index1, index2));
+                index2++;
                 
-                index1 = line.indexOf(" ", index2);
+                index1 = line.indexOf("_", index2);
                 int m = Integer.parseInt(line.substring(index2, index1));
+                index1++;
                 
-                index2 = line.indexOf(" ", index1);
+                index2 = line.indexOf("_", index1);
                 int y = Integer.parseInt(line.substring(index1, index2));
                 
                 manager.addEvent(n,l, d, m, y);
+                index1 = 0;
+                index2 = 0;
             }
             rdr.close();
         }
@@ -287,6 +305,7 @@ public class PR3_3 extends javax.swing.JFrame {
             System.out.printf("How did you manage that? %s\n", ex.getMessage());
         }
     }
+    
     /*
     * Saves event infromation to disk. The data is formated in such a way that
     * readFile() can access the information later and push it to manager
@@ -298,8 +317,8 @@ public class PR3_3 extends javax.swing.JFrame {
         try{
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(file));
             String line;
-            for(int a = 0; a < manager.getEvents().size(); ++a){
-                line = manager.getEvents().get(a).storageString();
+            for(int a = 0; a < manager.getSize(); ++a){
+                line = manager.get(a).storageString();
                 wrtr.write(line);
                 wrtr.newLine();
             }
@@ -315,7 +334,11 @@ public class PR3_3 extends javax.swing.JFrame {
     * and adds them to the list
     */
     public static void updateList(){
-        
+        DefaultListModel listModel = new DefaultListModel();
+        for(int a = 0; a < manager.getSize(); a++){
+            listModel.addElement(manager.get(a).toString());
+        }
+        jLstEvents.setModel(listModel);
     }
     
 
@@ -329,7 +352,7 @@ public class PR3_3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLblName;
     private javax.swing.JLabel jLblSort;
     private javax.swing.JLabel jLblTitle;
-    private javax.swing.JList jLstEvents;
+    private static javax.swing.JList jLstEvents;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFDay;
     private javax.swing.JTextField jTFLocation;

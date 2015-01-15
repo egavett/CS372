@@ -21,6 +21,14 @@ public class EventManager {
     }
     
     /*
+    * returns the size of list
+    * @retns size the size of the list
+    */
+    public int getSize(){
+        return list.size();
+    }
+    
+    /*
     * adds an event to list
     * @param String name, location
     * @param int day, month, year
@@ -64,5 +72,14 @@ public class EventManager {
     */
     public ArrayList<Event> getEvents(){
         return list;
+    }
+    
+    /*
+    * returns the event at a given index
+    * @param int index the index of the desiered item
+    * @return the desired event
+    */
+    public Event get(int index){
+        return list.get(index);
     }
 }

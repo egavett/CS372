@@ -59,7 +59,7 @@ public class Event {
     * Like toString, but to be used to store data in txt file
     */
     public String storageString(){
-        String str = name + " " + location + " " + date.getDay() + " " + date.getMonth() + " " + date.getYear() + " ";
+        String str = name + "_" + location + "_" + date.getDay() + "_" + date.getMonth() + "_" + date.getYear() + "_";
         return str;
     }
     

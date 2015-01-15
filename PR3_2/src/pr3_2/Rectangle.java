@@ -13,6 +13,9 @@ public class Rectangle extends Shape{
     private int width;
     private int height;
     
+    /*
+    * Constructor for the Rectangle class
+    */
     public Rectangle(int width, int height) throws ArithmeticException{
             if(width < 0 || height < 0)
                 throw new ArithmeticException("Shape Lengths must be greater than 0");
@@ -20,14 +23,21 @@ public class Rectangle extends Shape{
             this.height = height;
             
     }
-    
+    /*
+    * Calculates the area of the rectangle
+    * @return the area of the rectangle
+    */
     @Override
     public double getArea(){
         return width * height;
     }
     
+    /*
+    * Calculates the perimeter of the ellipse
+    * @return the perimeter of the ellipse
+    */
     @Override
     public double getPerimeter(){
-        return (2 * width) + (2 * height);
+        return 2 * (width + height);
     }
 }
