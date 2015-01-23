@@ -1,4 +1,4 @@
-package com.january.egavett.finalproject;
+package com.january.egavett.notyf;
 
 import java.util.GregorianCalendar;
 
@@ -9,14 +9,14 @@ public class PeriodicNotification extends MyNotification{
     private String period; //Signifies how often the notification is pushed. Accepted values are "daily", "weekly", "monthly" and "annual"
 
     /*
-    * Constructor for PeriodicNotification class
-    * Creates a new GregorianCalendar object
-    * Throws an exception if period is not a valid String
-    * @param String title, text, soundTitle, iconTitle, period
-    * @param int year, month, day, hour, minute
+     * Constructor for PeriodicNotification class
+     * Creates a new GregorianCalendar object
+     * Throws an exception if period is not a valid String
+     * @param String title, text, soundTitle, iconTitle, period
+     * @param int year, month, day, hour, minute
      */
-    public PeriodicNotification(String title, String text, String soundTitle, String iconTitle, int year, int month, int day, int hour, int minute, String period) throws IllegalStateException{
-        super(title, text, soundTitle, iconTitle, year, month, day, hour, minute);
+    public PeriodicNotification(String title, String line1, String line2, String soundTitle, String iconTitle, int year, int month, int day, int hour, int minute, String period) throws IllegalStateException{
+        super(title, line1, line2, soundTitle, iconTitle, year, month, day, hour, minute);
         try {
             if(!isValid(period))
                 throw new IllegalStateException("'" + period + "' is not a valid period.");
@@ -29,14 +29,14 @@ public class PeriodicNotification extends MyNotification{
     }
 
     /*
-   * Constructor for the PeriodicNotification class
-   * Uses an existing GregorianCalendar object
-   * Throws an exception if period is not a valid String
-   * @param String title, text, soundTitle, icon, period
-   * @param Date pushDate
-   */
-    public PeriodicNotification(String title, String text, String soundTitle, String iconTitle, GregorianCalendar pushDate, String period) throws IllegalStateException{
-        super(title, text, soundTitle, iconTitle, pushDate);
+     * Constructor for the PeriodicNotification class
+     * Uses an existing GregorianCalendar object
+     * Throws an exception if period is not a valid String
+     * @param String title, text, soundTitle, icon, period
+     * @param Date pushDate
+     */
+    public PeriodicNotification(String title, String line1, String line2, String soundTitle, String iconTitle, GregorianCalendar pushDate, String period) throws IllegalStateException{
+        super(title, line1, line2, soundTitle, iconTitle, pushDate);
         try {
             if(!isValid(period))
                 throw new IllegalStateException("'" + period + "' is not a valid period.");
@@ -49,17 +49,17 @@ public class PeriodicNotification extends MyNotification{
     }
 
     /*
-    * Pushes the notification to the status bar
-    */
+     * Pushes the notification to the status bar
+     */
     @Override
     public void push(){
         //TODO implement notification code
     }
 
     /*
-    * Resets the date after the push() method is called
-    * Uses GregorianCalender's built-in roll() methed
-    */
+     * Resets the date after the push() method is called
+     * Uses GregorianCalender's built-in roll() method
+     */
     public void setDate(){
         //daily notification
         if(period.equalsIgnoreCase("daily")){
@@ -80,14 +80,22 @@ public class PeriodicNotification extends MyNotification{
     }
 
     /*
-    * Checks to see if period is a valid sting
-    * valid strings are are "daily", "weekly", "monthly" and "annual" (not case sensitive)
-    * @param String period
-    * @return boolean based on period's validity
-    */
+     * Checks to see if period is a valid sting
+     * valid strings are are "daily", "weekly", "monthly" and "annual" (not case sensitive)
+     * @param String period
+     * @return boolean based on period's validity
+     */
     public boolean isValid(String period){
         if(period.equalsIgnoreCase("daily") || period.equalsIgnoreCase("weekly") || period.equalsIgnoreCase("monthly") || period.equalsIgnoreCase("annual"))
             return true;
         return false;
+    }
+
+    /*
+     * Accessor Method for period
+     * @return String period
+     */
+    public String getPeriod(){
+        return period;
     }
 }

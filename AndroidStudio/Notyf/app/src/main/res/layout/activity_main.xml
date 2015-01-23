@@ -33,5 +33,5 @@
         android:id="@+id/BtnAdd"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="BtnClick" />
+        android:onClick="btnClick" />
 </RelativeLayout>

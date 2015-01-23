@@ -1,19 +1,18 @@
-package com.january.egavett.finalproject;
+package com.january.egavett.notyf;
 
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 
@@ -92,7 +91,10 @@ public class MainActivity extends ActionBarActivity {
      * showing all the notification info
      */
     public void txtClick(View v){
+        TextView view = (TextView)v;
         Intent intent = new Intent(this, ViewActivity.class);
+        MyNotification n = manager.getNotification((String)view.getText());
+        intent.putExtra(NOTIFICATION, n);
         startActivity(intent);
     }
 
@@ -105,20 +107,38 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-
-
-
-
-
-
-
-
     /*
      * Takes current notification information and saves them to a file
      * @param String f the file name
      */
     public void readFile(String f){
-
+        try{
+            File file = new File(f);
+            BufferedReader rdr = new BufferedReader(new FileReader(file));
+            String line;
+            while((line = rdr.readLine()) != null){
+                String t = line;
+                String l1 = rdr.readLine();
+                String l2 = rdr.readLine();
+                String s = rdr.readLine();
+                String i = rdr.readLine();
+                int y = Integer.parseInt(rdr.readLine());
+                int m = Integer.parseInt(rdr.readLine());
+                int d = Integer.parseInt(rdr.readLine());
+                int h = Integer.parseInt(rdr.readLine());
+                int n = Integer.parseInt(rdr.readLine());
+                String p = rdr.readLine();
+                if(p.contains("*"))
+                    manager.addNotification(new SingleNotification(t, l1, l2,s, i, y, m, d, h, n));
+                else{
+                    manager.addNotification(new PeriodicNotification(t, l1, l2,s, i, y, m, d, h, n, p));
+                }
+                rdr.close();
+            }
+        }
+        catch(Exception e){
+            System.out.println("Exception encountered reading file.");
+        }
     }
 
     /*
@@ -126,6 +146,43 @@ public class MainActivity extends ActionBarActivity {
      * @param String f the file name
      */
     public void writeFile(String f){
-
+        manager.sort();
+        try {
+            File file = new File(f);
+            BufferedWriter wrtr = new BufferedWriter(new FileWriter(file));
+            for(int a = 0; a < manager.getArray().size(); a++){
+                MyNotification n = manager.getArray().get(a);
+                wrtr.write(n.getTitle());
+                wrtr.newLine();
+                wrtr.write(n.getLine1());
+                wrtr.newLine();
+                wrtr.write(n.getLine2());
+                wrtr.newLine();
+                wrtr.write(n.getSoundTitle());
+                wrtr.newLine();
+                wrtr.write(n.getIconTitle());
+                wrtr.newLine();
+                wrtr.write(n.getPushDate().YEAR);
+                wrtr.newLine();
+                wrtr.write(n.getPushDate().MONTH);
+                wrtr.newLine();
+                wrtr.write(n.getPushDate().DAY_OF_MONTH);
+                wrtr.newLine();
+                wrtr.write(n.getPushDate().HOUR);
+                wrtr.newLine();
+                wrtr.write(n.getPushDate().MINUTE);
+                wrtr.newLine();
+                if(n.getClass() == PeriodicNotification.class)
+                    wrtr.write((PeriodicNotification)n.getPeriod());
+                else
+                    wrtr.write("*");
+                wrtr.newLine();
+            }
+            wrtr.close();
+        }
+        catch(Exception e){
+            System.out.println("Exception encountered writing to file.");
+        }
     }
 }
+

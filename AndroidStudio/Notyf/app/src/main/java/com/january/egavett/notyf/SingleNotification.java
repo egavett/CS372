@@ -1,4 +1,5 @@
-package com.january.egavett.finalproject;
+package com.january.egavett.notyf;
+
 
 import java.util.GregorianCalendar;
 
@@ -12,8 +13,8 @@ public class SingleNotification extends MyNotification {
     * @param String title, text, soundTitle, iconTitle
     * @param int year, month, day, hour, minute
      */
-    public SingleNotification(String title, String text, String soundTitle, String iconTitle, int year, int month, int day, int hour, int minute){
-        super(title, text, soundTitle, iconTitle, year, month, day, hour, minute);
+    public SingleNotification(String title, String line1, String line2, String soundTitle, String iconTitle, int year, int month, int day, int hour, int minute){
+        super(title, line1, line2, soundTitle, iconTitle, year, month, day, hour, minute);
     }
 
     /*
@@ -22,15 +23,16 @@ public class SingleNotification extends MyNotification {
    * @param String title, text, soundTitle, icon
    * @param Date pushDate
    */
-    public SingleNotification(String title, String text, String soundTitle, String iconTitle, GregorianCalendar pushDate){
-        super(title, text, soundTitle, iconTitle, pushDate);
+    public SingleNotification(String title, String line1, String line2, String soundTitle, String iconTitle, GregorianCalendar pushDate){
+        super(title, line1, line2, soundTitle, iconTitle, pushDate);
     }
 
     /*
-    * Pushes the notification to the status bar
-    */
+     * Pushes the notification to the status bar
+     */
     @Override
     public void push(){
         //TODO implement notification code
     }
 }
+

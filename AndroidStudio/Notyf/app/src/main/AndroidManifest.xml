@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.january.egavett.finalproject" >
+    package="com.january.egavett.notyf" >
 
     <application
         android:allowBackup="true"
@@ -18,19 +18,11 @@
         </activity>
         <activity
             android:name=".AddActivity"
-            android:label="@string/title_activity_add"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.january.egavett.finalproject.MainActivity" />
+            android:label="@string/title_activity_add" >
         </activity>
         <activity
             android:name=".ViewActivity"
-            android:label="@string/title_activity_view"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.january.egavett.finalproject.MainActivity" />
+            android:label="@string/title_activity_view" >
         </activity>
     </application>
 

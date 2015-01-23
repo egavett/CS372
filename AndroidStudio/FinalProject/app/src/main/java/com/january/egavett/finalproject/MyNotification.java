@@ -1,18 +1,20 @@
 package com.january.egavett.finalproject;
 
+import java.util.Comparator;
+import java.util.GregorianCalendar;
 /**
  * Created by Eli Gavett on 1/19/2015.
  */
-public class MyNotification {
+public class MyNotification{
     private String title; //title text of the notification
     private String text; //content text of the notification
     private String soundTitle; //title of the sound used
     private String iconTitle; //title of the icon used
-    private Date pushDate; //the date the notification will be pushed
+    private GregorianCalendar pushDate; //the date the notification will be pushed
 
     /*
     * Constructor for the MyNotification class
-    * Creates a new date object
+    * Creates a new GregorianCalendar object
     * @param String title, text, soundTitle, iconTitle
     * @param int year, month, day, hour, minute
     */
@@ -21,16 +23,16 @@ public class MyNotification {
         this.text = text;
         this.soundTitle = soundTitle;
         this.iconTitle = iconTitle;
-        pushDate = new Date(year, month, day, hour, day);
+        pushDate = new GregorianCalendar(year, month, day, hour, day);
     }
 
     /*
     * Constructor for the MyNotification class
-    * uses an existing date object
+    * Uses an existing GregorianCalendar object
     * @param String title, text, soundTitle, icon
     * @param Date pushDate
     */
-    public MyNotification(String title, String text, String soundTitle, String iconTitle, Date pushDate){
+    public MyNotification(String title, String text, String soundTitle, String iconTitle, GregorianCalendar pushDate){
         this.title = title;
         this.text = text;
         this.soundTitle = soundTitle;
@@ -74,7 +76,7 @@ public class MyNotification {
     * Accessor method for pushDate
     * @return Date pushDate
     */
-    public Date getPushDate(){
+    public GregorianCalendar getPushDate(){
         return pushDate;
     }
 
@@ -83,4 +85,12 @@ public class MyNotification {
     * Will be overridden in all subclasses
     */
     public void push(){}
+
+    public static Comparator<MyNotification> NotifComparator = new Comparator<MyNotification>(){
+        @Override
+        public int compare(MyNotification n1, MyNotification n2){
+            return n1.getPushDate().compareTo(n2.getPushDate());
+        }
+    };
+
 }
