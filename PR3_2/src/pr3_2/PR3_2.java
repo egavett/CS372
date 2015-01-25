@@ -22,6 +22,7 @@ public class PR3_2 {
             list.add(new Ellipse(3, 4));
             list.add(new Triangle(7, 3, 3));
         
+            //PT -- Your test code could be more complete -- I'd like to see this loop run
             for(int a = 0; a < list.size(); a++)
                 System.out.printf("Area: %f Perimeter: %f\n", list.get(a).getArea(), list.get(a).getPerimeter());
         }

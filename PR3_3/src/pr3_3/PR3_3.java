@@ -213,7 +213,8 @@ public class PR3_3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnInputActionPerformed
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
-        writeFile("C:\\Users\\Eli Gavett\\Documents\\GitHub\\CS372\\PR3_3\\list.txt");
+        //PT -- Don't hardcode the path
+        writeFile("list.txt");
     }//GEN-LAST:event_jBtnSaveActionPerformed
 
     private void JCBoxSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBoxSortActionPerformed
@@ -258,7 +259,7 @@ public class PR3_3 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PR3_3().setVisible(true);
-                readFile("C:\\Users\\Eli Gavett\\Documents\\GitHub\\CS372\\PR3_3\\list.txt");
+                readFile("list.txt");
                 updateList();
             }
         });
