@@ -3,23 +3,19 @@ package com.january.egavett.notyf;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
-import java.util.Timer;
-import android.app.Notification;
 
 /**
  * Created by Eli Gavett on 1/21/2015.
  */
-public class NotificationManager {
+public class MyNotifManager {
     private ArrayList<MyNotification> theArray; //ArrayList that holds all the notifications created, sorted by date
-    private Timer theTimer; //Used to count down timer until next notification push
-    private GregorianCalendar currentDate; //Contains the current time and date, used to set the timer
+
 
     /*
-     * Constructor for the NotificationManager Class
+     * Constructor for the MyNotifManager Class
      */
-    public NotificationManager(){
+    public MyNotifManager(){
         theArray = new ArrayList<>();
-        theTimer = new Timer();
     }
 
     /*
@@ -34,8 +30,18 @@ public class NotificationManager {
     /*
      * Removes the next notification from the queue and pushes it to the status bar
      */
-    public void pushNotification(){
+    public void update(){
+        //if the period doesn't equal never, update the pushDate
+        //and re-add it to the ArrayList
+        if(!theArray.get(0).getPeriod().equalsIgnoreCase("never")){
+            MyNotification n = theArray.get(0);
+            n.setDate();
+            theArray.add(n);
+        }
 
+        //Remove the notification that was just pushed
+        theArray.remove(0);
+        sort();
     }
 
     /*

@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 public class AddActivity extends ActionBarActivity {
@@ -42,31 +43,41 @@ public class AddActivity extends ActionBarActivity {
 
     /*
      * Collects all information from the activity,
-     * Sends it to main acitivity to become notification
+     * Sends it to main activity to become notification
      */
     public void btnClick(View v){
-
-    }
-
-    public void test(View v){
         Intent intent = new Intent(this, MainActivity.class);
+
         EditText t = (EditText)this.findViewById(R.id.TfTitle);
-        intent.putExtra(TITLE, t.getText());
+        intent.putExtra("TITLE", t.getText().toString());
+
         EditText l1 = (EditText)this.findViewById(R.id.TfLine1);
-        intent.putExtra(LINEONE, l1.getText());
+        intent.putExtra("LINEONE", l1.getText().toString());
+
         EditText l2 = (EditText)this.findViewById(R.id.TfLine2);
-        intent.putExtra(LINETWO, l2.getText());
+        intent.putExtra("LINETWO", l2.getText().toString());
+
         EditText y = (EditText)this.findViewById(R.id.TfYear);
-        intent.putExtra(YEAR, y.getText());
+        intent.putExtra("YEAR", Integer.parseInt(y.getText().toString()));
+
+        //Gregorian Calender sets January as 0, need to compensate
         EditText m = (EditText)this.findViewById(R.id.TfMonth);
-        intent.putExtra(MONTH, m.getText());
+        intent.putExtra("MONTH", Integer.parseInt(m.getText().toString()) - 1);
+
         EditText d = (EditText)this.findViewById(R.id.TfDay);
-        intent.putExtra(DAY, d.getText());
+        intent.putExtra("DAY", Integer.parseInt(d.getText().toString()));
+
         EditText h = (EditText)this.findViewById(R.id.TfHour);
-        intent.putExtra(HOUR, h.getText());
+        intent.putExtra("HOUR", Integer.parseInt(h.getText().toString()));
+
         EditText n = (EditText)this.findViewById(R.id.TfMinute);
-        intent.putExtra(MINUTE, n.getText());
+        intent.putExtra("MINUTE", Integer.parseInt(n.getText().toString()));
+
+        RadioGroup pa = (RadioGroup)this.findViewById(R.id.RadGrpPeriod);
+        RadioButton p = (RadioButton)this.findViewById(pa.getCheckedRadioButtonId());
+        intent.putExtra("PERIOD", p.getText().toString());
 
         startActivity(intent);
+
     }
 }

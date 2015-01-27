@@ -1,6 +1,11 @@
 package com.january.egavett.notyf;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,17 +18,57 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends ActionBarActivity {
-    private NotificationManager manager = new NotificationManager();
+    //Instance Variable creation
+    private MyNotifManager manager = new MyNotifManager();
+    private Timer timer = new Timer();
+    TimerTask timerTask = new TimerTask()
+    {
+        @Override
+        public void run()
+        {
+            pushNotification();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+            addNotification(extras);
+        else
+            readFile("notifications.txt");
         updateList();
+        if(!(manager.getArray().isEmpty())){
+            setNotification();
+        }
+    }
+
+    /*
+     * Called when a bundle is returns from the addActivity
+     * Creates a new notification from that info
+     */
+    private void addNotification(Bundle extras) {
+        String t = extras.getString("TITLE");
+        String l1 = extras.getString("LINEONE");
+        String l2 = extras.getString("LINETWO");
+        int y = extras.getInt("YEAR");
+        int m = extras.getInt("MONTH");
+        int d = extras.getInt("DAY");
+        int h = extras.getInt("HOUR");
+        int n = extras.getInt("MINUTE");
+        String p = (String)extras.get("PERIOD");
+        manager.addNotification(new MyNotification(t, l1, l2, "nullSound", "nullIcon", y, m, d, h, n, p));
     }
 
 
@@ -55,6 +100,7 @@ public class MainActivity extends ActionBarActivity {
      */
     public void updateList(){
         LinearLayout l = (LinearLayout) this.findViewById(R.id.LinLayNotif);
+        l.removeAllViews();
         ArrayList<MyNotification> arrayList = manager.getArray();
         if(arrayList.size() == 0){
             TextView t = new TextView(this);
@@ -73,7 +119,7 @@ public class MainActivity extends ActionBarActivity {
                 t.setText(n.getTitle());
                 LinearLayout.LayoutParams lp =
                         new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                                                      LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.setMargins(10, 10, 10, 10);
                 t.setLayoutParams(lp);
 
@@ -91,11 +137,28 @@ public class MainActivity extends ActionBarActivity {
      * showing all the notification info
      */
     public void txtClick(View v){
-        TextView view = (TextView)v;
-        Intent intent = new Intent(this, ViewActivity.class);
-        MyNotification n = manager.getNotification((String)view.getText());
-        intent.putExtra(NOTIFICATION, n);
-        startActivity(intent);
+        try {
+            TextView view = (TextView) v;
+            Intent intent = new Intent(this, ViewActivity.class);
+            MyNotification n = manager.getNotification((String) view.getText());
+            if(n == null)
+                throw new Exception(((String)(view.getText())) + "does not exist.");
+            else {
+                intent.putExtra("TITLE", n.getTitle());
+                intent.putExtra("LINEONE", n.getLine1());
+                intent.putExtra("LINETWO", n.getLine2());
+                intent.putExtra("YEAR", n.getPushDate().get(GregorianCalendar.YEAR));
+                intent.putExtra("MONTH", n.getPushDate().get(GregorianCalendar.MONTH));
+                intent.putExtra("DAY", n.getPushDate().get(GregorianCalendar.DAY_OF_MONTH));
+                intent.putExtra("HOUR", n.getPushDate().get(GregorianCalendar.HOUR_OF_DAY));
+                intent.putExtra("MINUTE", n.getPushDate().get(GregorianCalendar.MINUTE));
+                intent.putExtra("PERIOD", n.getPeriod());
+                startActivity(intent);
+            }
+        }
+        catch(Exception e){
+            System.out.printf("Exception encountered trying to find Notification: %s/n", e.getMessage());
+        }
     }
 
     /*
@@ -113,7 +176,8 @@ public class MainActivity extends ActionBarActivity {
      */
     public void readFile(String f){
         try{
-            File file = new File(f);
+            String dirPath = getFilesDir().getAbsolutePath() + File.separator + f;
+            File file = new File(dirPath);
             BufferedReader rdr = new BufferedReader(new FileReader(file));
             String line;
             while((line = rdr.readLine()) != null){
@@ -128,16 +192,12 @@ public class MainActivity extends ActionBarActivity {
                 int h = Integer.parseInt(rdr.readLine());
                 int n = Integer.parseInt(rdr.readLine());
                 String p = rdr.readLine();
-                if(p.contains("*"))
-                    manager.addNotification(new SingleNotification(t, l1, l2,s, i, y, m, d, h, n));
-                else{
-                    manager.addNotification(new PeriodicNotification(t, l1, l2,s, i, y, m, d, h, n, p));
-                }
+                manager.addNotification(new MyNotification(t, l1, l2, s, i, y, m, d, h, n, p));
                 rdr.close();
             }
         }
         catch(Exception e){
-            System.out.println("Exception encountered reading file.");
+            System.out.printf("Exception encountered reading file: %s\n", e.getMessage());
         }
     }
 
@@ -148,7 +208,8 @@ public class MainActivity extends ActionBarActivity {
     public void writeFile(String f){
         manager.sort();
         try {
-            File file = new File(f);
+            String dirPath = getFilesDir().getAbsolutePath() + File.separator + f;
+            File file = new File(dirPath);
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(file));
             for(int a = 0; a < manager.getArray().size(); a++){
                 MyNotification n = manager.getArray().get(a);
@@ -162,27 +223,88 @@ public class MainActivity extends ActionBarActivity {
                 wrtr.newLine();
                 wrtr.write(n.getIconTitle());
                 wrtr.newLine();
-                wrtr.write(n.getPushDate().YEAR);
+                wrtr.write((n.getPushDate().get(GregorianCalendar.YEAR)));
                 wrtr.newLine();
-                wrtr.write(n.getPushDate().MONTH);
+                wrtr.write(n.getPushDate().get(GregorianCalendar.MONTH));
                 wrtr.newLine();
-                wrtr.write(n.getPushDate().DAY_OF_MONTH);
+                wrtr.write(n.getPushDate().get(GregorianCalendar.DAY_OF_MONTH));
                 wrtr.newLine();
-                wrtr.write(n.getPushDate().HOUR);
+                wrtr.write(n.getPushDate().get(GregorianCalendar.HOUR_OF_DAY));
                 wrtr.newLine();
-                wrtr.write(n.getPushDate().MINUTE);
+                wrtr.write(n.getPushDate().get(GregorianCalendar.MINUTE));
                 wrtr.newLine();
-                if(n.getClass() == PeriodicNotification.class)
-                    wrtr.write((PeriodicNotification)n.getPeriod());
-                else
-                    wrtr.write("*");
+                wrtr.write(n.getPeriod());
                 wrtr.newLine();
             }
             wrtr.close();
         }
         catch(Exception e){
-            System.out.println("Exception encountered writing to file.");
+            System.out.printf("Exception encountered writing to file: %s\n", e.getMessage());
         }
+    }
+
+    /*
+     * Gets the first notification from manager
+     * Sets a timer to push that notification when the appropriate date has been reached
+     */
+    private void setNotification() {
+        try {
+            MyNotification n = manager.getArray().get(0);
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+            String dateString = n.getPushDate().MONTH + "/" + n.getPushDate().DAY_OF_MONTH + "/" + n.getPushDate().YEAR + " " +
+                                n.getPushDate().HOUR_OF_DAY + ":" + n.getPushDate().MINUTE;
+            Date date = formatter.parse(dateString);
+            timer.schedule(timerTask, date);
+        }
+        catch (Exception ex){
+            System.out.printf("Exception encountered setting timer: %s", ex.getMessage());
+        }
+    }
+
+    /*
+     * Builds a new Notification from the top MyNotifcation in manager
+     * Pushes it, and updates the date/removes the notification, depending on situation
+     */
+    public void pushNotification(){
+        MyNotification n = manager.getArray().get(0);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(n.getTitle())
+                        .setContentText(n.getLine1() + " " + n.getLine2());
+        Intent resultIntent = new Intent(this, MainActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(0, mBuilder.build());
+
+        manager.update();
+        setNotification();
+    }
+
+    /*
+     * Called when the refresh button is clicked
+     * Helper method to call updateList()
+     */
+    public void refresh(View v){
+        updateList();
+    }
+
+    /*
+    * Overrides the onStop() method
+    * Calls the super function, then the writeFIle method
+     */
+    @Override
+    public void onStop(){
+        super.onStop();
+        writeFile("notifications.txt");
     }
 }
 

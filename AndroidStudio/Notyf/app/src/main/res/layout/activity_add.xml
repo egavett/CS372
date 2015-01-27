@@ -24,7 +24,8 @@ tools:context="com.january.egavett.notyf.AddActivity">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,7 +44,8 @@ tools:context="com.january.egavett.notyf.AddActivity">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +65,8 @@ tools:context="com.january.egavett.notyf.AddActivity">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -187,7 +190,9 @@ tools:context="com.january.egavett.notyf.AddActivity">
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/TxtRepeat"
-        android:id="@+id/radioGroup">
+        android:id="@+id/RadGrpPeriod"
+        android:measureWithLargestChild="true"
+        android:focusableInTouchMode="false">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -230,7 +235,7 @@ tools:context="com.january.egavett.notyf.AddActivity">
             android:text="Create Notification"
             android:id="@+id/BtnAdd"
             android:layout_centerHorizontal="true"
-            android:onClick="test" />
+            android:onClick="btnClick" />
     </RadioGroup>
 
 </RelativeLayout>

@@ -21,7 +21,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/LinLayNotif"></LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -34,4 +34,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="btnClick" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id="@+id/BtnRefresh"
+        android:layout_alignTop="@+id/BtnAdd"
+        android:layout_toRightOf="@+id/BtnAdd"
+        android:layout_toEndOf="@+id/BtnAdd"
+        android:onClick="refresh" />
 </RelativeLayout>

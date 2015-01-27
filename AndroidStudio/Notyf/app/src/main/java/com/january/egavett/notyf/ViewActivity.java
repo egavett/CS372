@@ -4,6 +4,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class ViewActivity extends ActionBarActivity {
@@ -12,6 +15,8 @@ public class ViewActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
+        Bundle extras = getIntent().getExtras();
+        updateLabels(extras);
     }
 
 
@@ -35,5 +40,32 @@ public class ViewActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+     * Updates the labels in ViewActivity
+     * With the information in the bundle
+     * @param Bundle extras
+     */
+    public void updateLabels(Bundle extras){
+        TextView t = (TextView)this.findViewById(R.id.TxtTitle);
+        t.setText(extras.getString("TITLE"));
+
+        TextView l1 = (TextView)this.findViewById((R.id.TxtLine1));
+        l1.setText(extras.getString("LINEONE"));
+
+        TextView l2 = (TextView)this.findViewById((R.id.TxtLine2));
+        l2.setText(extras.getString("LINETWO"));
+
+        String d = extras.getInt("DAY") + "/" + (extras.getInt("MONTH") + 1) + "/" + extras.getInt("YEAR");
+        TextView dView = (TextView)this.findViewById(R.id.TxtDate);
+        dView.setText(d);
+
+        String time = extras.getInt("HOUR") + ":" + extras.getInt("MINUTE");
+        TextView timeView = (TextView)this.findViewById(R.id.TxtTime);
+        timeView.setText(time);
+
+        TextView p = (TextView)this.findViewById(R.id.TxtPeriod);
+        p.setText("Period: " + extras.getString("PERIOD"));
     }
 }
