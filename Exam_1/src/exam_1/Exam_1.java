@@ -155,7 +155,7 @@ public class Exam_1 extends javax.swing.JFrame {
     * Notifys the user once the process has been complete
     */
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
-        save("C:\\Users\\Eli Gavett\\Documents\\GitHub\\CS372\\Exam_1\\Players.txt");
+        save("Players.txt");
         System.out.println("User Data has been saved.");
     }//GEN-LAST:event_jBtnSaveActionPerformed
    
@@ -253,7 +253,7 @@ public class Exam_1 extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Exam_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        readFile("C:\\Users\\Eli Gavett\\Documents\\GitHub\\CS372\\Exam_1\\Players.txt");
+        readFile("Players.txt");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

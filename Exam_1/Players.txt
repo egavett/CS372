@@ -4,3 +4,4 @@ Jian 0
 Kirby 0
 Seth 200
 Megan 1000
+pete 480
