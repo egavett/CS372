@@ -41,6 +41,7 @@ public class PR3_1 {
     * @param list the ArrayList
     * @return max the maximum value
     */
+    //PT -- separate this logic out from the UI, and into its own class. -5
     public static int maximum(ArrayList<Integer> list){
         int max = list.get(0);
         for(int a = 1; a < list.size(); a++){
