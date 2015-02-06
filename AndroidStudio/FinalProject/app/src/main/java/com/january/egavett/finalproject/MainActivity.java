@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-
+//PT -- This is all quite close. You did good work here, it just needs to get finished.
 public class MainActivity extends ActionBarActivity {
     private NotificationManager manager = new NotificationManager();
 
