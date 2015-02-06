@@ -21,7 +21,7 @@ public class Restaurant {
     * @param int rating a rating from 0 to 5 stars
     */
     public Restaurant(String name, String address, String notes, int rating) throws ArithmeticException{
-        if(rating < 0 || rating > 5)
+        if(rating < 0 || rating > 5) //PT -- good
             throw new ArithmeticException("Ratings must be from 0 to 5 stars");
         else
         {
